@@ -1,0 +1,71 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title
+      >Введення даних для розрахунку точності рекомендацій</ion-card-title
+    >
+  </ion-card-header>
+
+  <ion-card-content>
+    <form [formGroup]="recommendationForm" (ngSubmit)="onSubmit()">
+      <ion-item>
+        <ion-label position="stacked"
+          >Список рекомендацій (через кому)</ion-label
+        >
+        <ion-input
+          type="text"
+          formControlName="recommendations"
+          placeholder="книга, телефон, годинник"
+        ></ion-input>
+        <ion-note
+          slot="error"
+          *ngIf="
+            recommendationForm.get('recommendations')?.invalid &&
+            recommendationForm.get('recommendations')?.touched
+          "
+        >
+          Будь ласка, введіть список рекомендацій
+        </ion-note>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Список покупок (через кому)</ion-label>
+        <ion-input
+          type="text"
+          formControlName="purchases"
+          placeholder="книга, чашка, телефон"
+        ></ion-input>
+        <ion-note
+          slot="error"
+          *ngIf="
+            recommendationForm.get('purchases')?.invalid &&
+            recommendationForm.get('purchases')?.touched
+          "
+        >
+          Будь ласка, введіть список покупок
+        </ion-note>
+      </ion-item>
+
+      <ion-row class="ion-margin-top">
+        <ion-col>
+          <ion-button
+            expand="block"
+            type="submit"
+            [disabled]="recommendationForm.invalid"
+          >
+            Розрахувати
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button
+            expand="block"
+            type="button"
+            color="medium"
+            (click)="resetForm()"
+          >
+            Очистити
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-card-content>
+</ion-card>
